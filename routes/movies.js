@@ -15,7 +15,7 @@ router.post(
     body: Joi.object().keys({
       country: Joi.string().required(),
       director: Joi.string().required(),
-      duration: Joi.string().integer().required(),
+      duration: Joi.number().integer().required(),
       year: Joi.string().required(),
       description: Joi.string().required(),
       image: Joi.string().required().pattern(/(https)?:\/\/(www\.)?[a-z0-9\-._~:/?#[\]@!$&'()*+,;=]{2,}\.[a-z0-9/#?]{2,}/),
