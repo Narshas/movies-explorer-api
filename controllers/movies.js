@@ -16,7 +16,7 @@ const getMovies = (req, res, next) => {
     .catch(next);
 };
 
-const createMovie = (req, res, next) => {
+const postMovie = (req, res, next) => {
   const {
     country,
     director,
@@ -81,6 +81,6 @@ const deleteMovie = (req, res, next) => {
 
 module.exports = {
   getMovies,
-  createMovie,
+  postMovie,
   deleteMovie,
 };

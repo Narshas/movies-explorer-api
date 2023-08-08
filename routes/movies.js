@@ -3,7 +3,7 @@ const { celebrate, Joi } = require('celebrate');
 
 const {
   getMovies,
-  createMovie,
+  postMovie,
   deleteMovie,
 } = require('../controllers/movies');
 
@@ -26,7 +26,7 @@ router.post(
       nameEN: Joi.string().required(),
     }),
   }),
-  createMovie,
+  postMovie,
 );
 
 router.delete(

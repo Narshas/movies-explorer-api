@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const { createUser, login } = require('../controllers/users');
 const userRoutes = require('./users');
-// const movieRoutes = require('./movies');
+const movieRoutes = require('./movies');
 const auth = require('../middlewares/auth');
 
 const NotFoundError = require('../errors/error-not-found');
@@ -32,7 +32,7 @@ router.post(
 
 router.use(auth);
 router.use('/users', userRoutes);
-// router.use('/movies', movieRoutes);
+router.use('/movies', movieRoutes);
 
 router.use('*', (req, res, next) => {
   next(new NotFoundError('we dont have it'));
