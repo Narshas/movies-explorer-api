@@ -14,6 +14,8 @@ const limiter = rateLimit({
   max: 100,
 });
 
+const { dataMovies } = require('./config');
+
 const { PORT = 3000 } = process.env;
 
 const app = express();
@@ -23,7 +25,7 @@ app.use(requestLogger);
 app.use(helmet());
 app.use(limiter);
 
-mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb', { family: 4, useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(dataMovies, { family: 4, useNewUrlParser: true, useUnifiedTopology: true });
 app.use(router);
 app.use(errorLogger);
 app.use(errors());

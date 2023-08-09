@@ -51,7 +51,7 @@ const postMovie = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(BadRequestError('data is incorrect'));
+        next(new BadRequestError('data is incorrect'));
       } else {
         next(err);
       }
