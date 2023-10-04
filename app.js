@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const rateLimit = require('express-rate-limit');
+// eslint-disable-next-line
+const cors = require('cors');
 const { errors } = require('celebrate');
 const error = require('./middlewares/error');
 const router = require('./routes/index');
@@ -16,10 +18,12 @@ const limiter = rateLimit({
 
 const { dataMovies } = require('./config');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 
 const app = express();
 app.use(express.json());
+
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
 app.use(requestLogger);
 app.use(helmet());
