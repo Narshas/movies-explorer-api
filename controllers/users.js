@@ -41,12 +41,15 @@ const login = (req, res, next) => {
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+      console.log('значение для генерации JWT:', NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
+      console.log('токен:', token);
       res.status(OK).send({ token });
     })
     .catch(next);
 };
 
 const getCurrentUser = (req, res, next) => {
+  console.log('getCurrentUser called:', req.user._id);
   User.findById(req.user._id)
     .then((user) => {
       if (!user) {

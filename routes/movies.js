@@ -29,11 +29,25 @@ router.post(
   postMovie,
 );
 
+// router.delete(
+//   '/:movieId',
+//   celebrate({
+//     params: Joi.object().keys({
+//       _id: Joi.string().length(24).hex().required(),
+//     }),
+//   }),
+//   deleteMovie,
+// );
+
 router.delete(
   '/:movieId',
+  (req, res, next) => {
+    console.log('Received movieId:', req.params.movieId);
+    next();
+  },
   celebrate({
     params: Joi.object().keys({
-      _id: Joi.string().length(24).hex().required(),
+      movieId: Joi.string().length(24).hex().required(),
     }),
   }),
   deleteMovie,
