@@ -23,7 +23,19 @@ const { PORT = 3001 } = process.env;
 const app = express();
 app.use(express.json());
 
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://localhost:3000',
+    'http://localhost:3001',
+    'https://localhost:3001',
+    'https://narshas.diploma.nomoreparties.co',
+    'http://narshas.diploma.nomoreparties.co',
+    'https://api.narshas.diploma.nomoreparties.co',
+    'http://api.narshas.diploma.nomoreparties.co',
+  ],
+  credentials: true,
+}));
 
 app.use(requestLogger);
 app.use(helmet());

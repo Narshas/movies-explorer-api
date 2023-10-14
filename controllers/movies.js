@@ -59,10 +59,11 @@ const postMovie = (req, res, next) => {
 };
 
 const deleteMovie = (req, res, next) => {
-  // Movie.findById(req.params._id)
-  console.log('Attempting to delete movie with ID:', req.params.movieId);
+  console.log('Attempting to delete movie with ID:', req.user._id);
   console.log('Logged in user ID:', req.user._id);
-  Movie.findById(req.params.movieId)
+  Movie.findById(req.params._id)
+  // Movie.findById(req.params.movieId)
+  // Movie.findOne({ movieId: req.params.movieId })
     .then((movie) => {
       if (!movie) {
         throw new NotFoundError('we dont have it');
@@ -70,8 +71,12 @@ const deleteMovie = (req, res, next) => {
       if (req.user._id !== movie.owner.toString()) {
         throw new NotAllowedError('not your movie');
       }
-      return movie.deleteOne()
-        .then(() => res.status(OK).send({ message: 'movie deleted' }));
+      Movie.deleteOne({ _id: movie._id })
+        .then(() => {
+          res.status(OK).send(movie);
+          console.log('Successfully deleted movie with ID:', movie._id);
+        })
+        .catch(next);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
