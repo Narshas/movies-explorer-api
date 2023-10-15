@@ -28,6 +28,7 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "lint": "npx eslint .",
+    "build": "react-scripts build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
